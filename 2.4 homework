@@ -1,0 +1,116 @@
+public abstract class Shape
+{
+
+    public abstract int Area();
+
+    public abstract bool IsRight();
+}
+
+public class Rectangle:Shape
+{
+    int height;
+    int width;
+    public Rectangle(int height,int width)
+    {
+        this.height = height;
+        this.width = width;
+    }
+
+    public override int Area()
+    {
+        return height* width;
+    }
+
+    public override bool IsRight()
+    {
+        if (height > 0 && width > 0)
+            return true;
+        else
+            return false;
+    }
+}
+
+public class Square : Shape
+{
+    int width;
+    public Square(int width)
+    {
+        this.width=width;
+    }
+
+    public override int Area()
+    {
+        return width* width;
+    }
+
+    public override bool IsRight()
+    {
+        if (width > 0)
+            return true;
+        else
+            return false;
+    }
+}
+
+public class Triangle : Shape
+{
+    int bottom,height;
+    int side1,side2,side3;
+    public Triangle(int bottom,int height,int side1,int side2,int side3)
+    {
+        this.bottom=bottom;this.height=height;this.side1=side1;this.side2=side2;this.side3=side3;   
+    }
+
+    public override int Area()
+    {
+        return bottom* height/2;
+    }
+
+    public override bool IsRight()
+    {
+        if (height > 0 && bottom > 0 && side1 > 0 && side2 > 0 && side3 > 0)
+        {
+            if (side1 + side2 > side3 && side1 + side3 > side2 && side2 + side3 > side2)
+            {
+                if (side1 - side2 < side3 && side1 - side3 < side2 && side2 - side3 < side2)
+                    return true;
+                else
+                    return false;
+            }
+            else
+                return false;
+            
+        }
+        else
+            return false;
+    }
+}
+
+public class Program
+{
+    static void Main(string[]args)
+    {
+        Console.WriteLine("Creat a rectangle, please input its height and width:");
+        int a=Convert.ToInt32(Console.ReadLine());
+        int b = Convert.ToInt32(Console.ReadLine());
+        Shape shape1= new Rectangle(a,b);
+        Console.WriteLine(shape1.Area());
+        Console.WriteLine(shape1.IsRight());
+
+        Console.WriteLine("Creat a square, please input its width:");
+        int c = Convert.ToInt32(Console.ReadLine());
+        Shape shape2 = new Square(c);
+        Console.WriteLine(shape2.Area());
+        Console.WriteLine(shape2.IsRight());
+
+        Console.WriteLine("Creat a triangle, please input its heitht, width and three sides:");
+        int h = Convert.ToInt32(Console.ReadLine());
+        int w = Convert.ToInt32(Console.ReadLine());
+        int s1 = Convert.ToInt32(Console.ReadLine());
+        int s2= Convert.ToInt32(Console.ReadLine());
+        int s3= Convert.ToInt32(Console.ReadLine());
+        Shape shape3 = new  Triangle(h,w,s1,s2,s3);
+        Console.WriteLine(shape3.Area());
+        Console.WriteLine(shape3.IsRight());
+    }
+}
